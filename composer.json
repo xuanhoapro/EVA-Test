@@ -1,0 +1,19 @@
+{
+    "name": "hoanx/test",
+    "description": "Test EVA",
+    "type": "project-test",
+    "require": {
+        "smarty/smarty": "^3.1"
+    },
+    "autoload": {
+        "classmap": [
+            "Objects/History.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "HoaNX",
+            "email": "xuanhoapro@gmail.com"
+        }
+    ]
+}
