@@ -7,7 +7,9 @@
     },
     "autoload": {
         "classmap": [
-            "Objects/History.php"
+            "Objects/History.php",
+            "Objects/Validator.php",
+            "Objects/Division.php"
         ]
     },
     "authors": [

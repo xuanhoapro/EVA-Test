@@ -1,38 +1,62 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ACV.HoaNX
- * Date: 6/2/2017
- * Time: 1:46 PM
- */
 
 class History
 {
-    protected $data;
-    public function __construct()
+    protected $history = [];
+    static protected $cookieName = 'history';
+
+    public function __construct($history = null)
     {
-        
+        if ($history) {
+            $this->history = $history;
+        }
     }
 
     /**
-     * @return mixed
+     * @param array|null $history
      */
-    public function getData()
+    public function setHistory($history)
     {
-        return $this->data;
+        $this->history = $history;
     }
 
     /**
-     * @param mixed $data
+     * @return array|null
      */
-    public function setData($data)
+    public function getHistory()
     {
-        $this->data = $data;
+        return $this->history;
     }
 
-    public function render()
+    /**
+     * Get current history data
+     *
+     * @return array|mixed
+     */
+    public static function getCurrentHistory()
     {
-        return 'HoaNX';
+        $result = [];
+        if (isset($_COOKIE[self::$cookieName])) {
+            $result = unserialize($_COOKIE[self::$cookieName]);
+        }
+        return $result;
     }
 
+    /**
+     * save history data to cookie
+     *
+     * @return array|null
+     */
+    public function saveHistory()
+    {
+        $currentHistory = self::getCurrentHistory();
+        if ($currentHistory) {
+            $this->history = array_merge($this->history, $currentHistory);
+            unset($_COOKIE[self::$cookieName]);
+        }
+
+        setcookie(self::$cookieName, serialize($this->history));
+
+        return $this->history;
+    }
 }
